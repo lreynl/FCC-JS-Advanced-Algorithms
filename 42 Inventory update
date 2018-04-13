@@ -1,0 +1,45 @@
+//42. "Compare and update the inventory stored in a
+//2D array against a second 2D array of a fresh
+//delivery. Update the current existing inventory
+//item quantities (in arr1). If an item cannot be found,
+//add the new item and quantity into the inventory
+//array. The returned inventory array should be in
+//alphabetical order by item."
+function updateInventory(arr1, arr2) {
+  //copy to json's & reverse
+  var obj1 = {};
+  var len1 = arr1.length;
+  //Put the contents of arr1 into json object
+  //Make an array of keys
+  for(var i = 0; i < len1; ++i) {
+    obj1[arr1[i][1]] = arr1[i][0];
+  }
+
+  //Sort the array of keys alphabetically
+  var obj2 = {};
+  var len2 = arr2.length;
+  //Put the contents of arr2 into json object
+  //Make an array of keys
+  for(i = 0; i < len2; ++i) {
+    obj2[arr2[i][1]] = arr2[i][0];
+  }
+
+  for(var elem in obj2) {
+    if(obj1.hasOwnProperty(elem)) {
+      obj1[elem] += obj2[elem];
+    } else {
+      obj1[elem] = obj2[elem];
+    }
+  }
+  var keys = Object.keys(obj1);
+  keys.sort();
+  var temp = [];
+  var newArr = [];
+  keys.forEach(function(k) {
+    temp = [];
+    temp.push(obj1[k]);
+    temp.push(k);
+    newArr.push(temp);
+  });
+  return newArr;
+}
