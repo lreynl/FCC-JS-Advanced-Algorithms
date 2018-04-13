@@ -1,0 +1,22 @@
+//45. "Return a new array that transforms the
+//element's average altitude into their orbital periods.
+//The array will contain objects in the format
+//{name: 'name', avgAlt: avgAlt}."
+
+function orbitalPeriod(arr) {
+  var GM = 398600.4418;
+  var earthRadius = 6367.4447;
+  var pi = 3.14159265;
+  var copy = [];
+  for(var obj in arr) {
+    if(arr.hasOwnProperty(obj)) {
+      var avg = arr[obj].avgAlt;
+      var temp = {};
+      var ret = (2 * pi) * Math.sqrt((Math.pow((avg + earthRadius), 3) / GM));
+      temp.name = arr[obj].name;
+      temp.orbitalPeriod = Math.round(ret);
+      copy.push(temp);
+    }
+  }
+  return copy;
+}
