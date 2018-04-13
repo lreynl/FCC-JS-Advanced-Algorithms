@@ -1,0 +1,27 @@
+//44. Add object constructors with
+//the given methods
+var Person = function(firstAndLast) {
+  var fullName = firstAndLast || "";
+  this.getFullName = function() {
+    return fullName;
+  };
+  this.getFirstName = function() {
+    var temp = fullName.split(' ');
+    return temp[0];
+  };
+  this.getLastName = function() {
+    var temp = fullName.split(' ');
+    return temp[1];
+  };
+  this.setFullName = function(full) {
+    fullName = full;
+  };
+  this.setFirstName = function(first) {
+    var temp = fullName.split(' ');
+    fullName = first.concat(' ').concat(temp[1]);
+  };
+  this.setLastName = function(last) {
+    var temp = fullName.split(' ');
+    fullName = temp[0].concat(' ').concat(last);
+  };
+};
