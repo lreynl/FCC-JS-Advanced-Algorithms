@@ -1,0 +1,52 @@
+//43. "Return the number of total permutations of
+//the provided string that don't have repeated
+//consecutive letters. Assume that all characters
+//in the provided string are each unique."
+
+//I couln't figure out the math to do
+//this the right way, so I had to brute-force
+//it. It uses Heap's algorithm (iterative).
+function permAlone(str) {
+  var list = permutations(str);
+  var num = 0;
+  var len = list.length;
+  for(var i = 0; i < len; ++i) {
+    if(!/(\w)\1+/.test(list[i])) {
+      ++num;
+    }
+  }
+  return num;
+}
+
+function permutations(str) {
+  var str_arr = str.split('');
+  var len = str_arr.length;
+  var list = [];
+  var arr = new Array(len);
+  arr.fill(0);
+  var temp = '';
+  var i = 0;
+  list.push(str_arr.join(''));
+  while(i < len) {
+    if(arr[i] < i) {
+      if(i % 2 === 0) {
+        //swap str_arr[0] <-> str_arr[i]
+        temp = str_arr[i];
+        str_arr[i] = str_arr[0];
+        str_arr[0] = temp;
+      } else {
+        //swap str_arr[arr[i]] <-> str_arr[i]
+        temp = str_arr[i];
+        str_arr[i] = str_arr[arr[i]];
+        str_arr[arr[i]] = temp;
+      }
+      list.push(str_arr.join(''));
+      arr[i] += 1;
+      i = 0;
+    } else {
+      arr[i] = 0;
+      i++;
+    }
+  }
+  return list;
+}
