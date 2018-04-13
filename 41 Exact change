@@ -1,0 +1,132 @@
+//41. Simulate moving money in and
+//out of a cash register
+function checkCashRegister(price, cash, cid) {
+  var have = 0.0;
+  var cid_len = cid.length;
+  var change = (cash - price);
+  var ret_cid = [];
+  for( i = 0; i < cid_len; ++i) {
+    have += cid[i][1];
+  }
+  if(change > have) {
+    return "Insufficient Funds";
+  }
+  if(change === have) {
+    return "Closed";
+  }
+  var hundred = [],
+      twenty  = [],
+      ten     = [],
+      five    = [],
+      one     = [],
+      quarter = [],
+      dime    = [],
+      nickel  = [],
+      penny   = [];
+
+  while(change >= 100.0 && cid[8][1] >= 100.0) {
+    cid[8][1] -= 100.0;
+    change = (change - 100.0).toFixed(2);
+    if(hundred.length === 0) {
+      hundred = ["ONE HUNDRED", 100.0];
+    } else {
+      hundred[1] += 100.0;
+    }
+  }
+
+  while(change >= 20.0 && cid[7][1] >= 20.0) {
+    cid[7][1] -= 20.0;
+    change = (change - 20.0).toFixed(2);
+    if(twenty.length === 0) {
+      twenty = ["TWENTY", 20.0];
+    } else {
+      twenty[1] += 20.0;
+    }
+  }
+
+  while(change >= 10.0 && cid[6][1] >= 10.0) {
+    cid[6][1] -= 10.0;
+    change = (change - 10.0).toFixed(2);
+    if(ten.length === 0) {
+      ten = ["TEN", 10.0];
+    } else {
+      ten[1] += 10.0;
+    }
+  }
+
+  while(change >= 5.0 && cid[5][1] >= 5.0) {
+    cid[5][1] -= 5.0;
+    change = (change - 5.0).toFixed(2);
+    if(five.length === 0) {
+      five = ["FIVE", 5.0];
+    } else {
+      five[1] += 5.0;
+    }
+  }
+
+  while(change >= 1.0 && cid[4][1] >= 1.0) {
+    cid[4][1] -= 1.0;
+    change = (change - 1.0).toFixed(2);
+    if(one.length === 0) {
+      one = ["ONE", 1.0];
+    } else {
+      one[1] += 1.0;
+    }
+  }
+
+  while(change >= 0.25 && cid[3][1] >= 0.25) {
+    cid[3][1] -= 0.25;
+    change = (change - 0.25).toFixed(2);
+    if(quarter.length === 0) {
+      quarter = ["QUARTER", 0.25];
+    } else {
+      quarter[1] += 0.25;
+    }
+  }
+
+  while(change >= 0.10 && cid[2][1] >= 0.10) {
+    cid[2][1] -= 0.10;
+    change = (change - 0.10).toFixed(2);
+    if(dime.length === 0) {
+      dime = ["DIME", 0.10];
+    } else {
+      dime[1] += 0.10;
+    }
+  }
+
+  while(change >= 0.05 && cid[1][1] >= 0.05) {
+    cid[1][1] -= 0.05;
+    change = (change - 0.05).toFixed(2);
+    if(nickel.length === 0) {
+      nickel = ["NICKEL", 0.05];
+    } else {
+      nickel[1] += 0.05;
+    }
+  }
+
+  while(change >= 0.01 && cid[0][1] >= 0.01) {
+    cid[0][1] -= 0.01;
+    change = (change - 0.01).toFixed(2);
+    if(penny.length === 0) {
+      penny = ["PENNY", 0.01];
+    } else {
+      penny[1] += 0.01;
+    }
+  }
+
+  if(change > 0.01) {
+    return "Insufficient Funds";
+  }
+
+  if(hundred.length > 0) ret_cid.push(hundred);
+   if(twenty.length > 0) ret_cid.push(twenty);
+      if(ten.length > 0) ret_cid.push(ten);
+     if(five.length > 0) ret_cid.push(five);
+      if(one.length > 0) ret_cid.push(one);
+  if(quarter.length > 0) ret_cid.push(quarter);
+     if(dime.length > 0) ret_cid.push(dime);
+   if(nickel.length > 0) ret_cid.push(nickel);
+    if(penny.length > 0) ret_cid.push(penny);
+
+  return ret_cid;
+}
