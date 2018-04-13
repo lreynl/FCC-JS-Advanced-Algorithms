@@ -16,7 +16,6 @@ function rem_sp_d(str) {
 
 function is_correct(arr) {
   var new_str = arr.join('');
-  console.log(new_str);
   if((/^((1?)(\d){10})$|^((1?)\(\d{3}\)\d{7})$/).test(new_str)) return true;
   return false;
 }
