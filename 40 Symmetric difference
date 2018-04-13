@@ -1,0 +1,31 @@
+//40. Symmetric difference of a collection
+//of arrays (only unique elements not shared
+//by other arrays)
+function sym(args) {
+  var arg_len = arguments.length;
+  if(arg_len === 1) return args[0];
+  var arg = arguments;
+  var temp_a = [];
+  var temp_b = [];
+  var len_a = 0;
+  var len_b = 0;
+  var i = 0;
+  for(i = 0; i < arg_len - 1; ++i) {
+    len_a = arg[i + 1].length;
+    len_b = arg[i].length;
+    temp_a = [];
+    temp_b = [];
+    for(j = 0; j < len_a; ++j) {
+      if(!arg[i].includes(arg[i + 1][j]) && !temp_a.includes(arg[i + 1][j])) {
+        temp_a.push(arg[i + 1][j]);
+      }
+    }
+    for(k = 0; k < len_b; ++k) {
+      if(!arg[i + 1].includes(arg[i][k]) && !temp_b.includes(arg[i][k])) {
+        temp_b.push(arg[i][k]);
+      }
+    }
+    arg[i + 1] = temp_a.concat(temp_b);
+  }
+  return arg[i];
+}
